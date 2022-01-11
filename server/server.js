@@ -8,7 +8,7 @@ const{ typeDefs, resolvers } = require('./schemas');
 const{ authMiddleware } = require('./utils/auth');
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
+  process.env.MONGODB_URI || 'mongodb://localhost/BooKSearchDB',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
