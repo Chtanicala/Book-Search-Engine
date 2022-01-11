@@ -1,21 +1,21 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const{ ApolloServer } = require('apollo-server-express')
 
 const{ typeDefs, resolvers } = require('./schemas');
 const{ authMiddleware } = require('./utils/auth');
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/BooKSearchDB',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  },
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI || 'mongodb://localhost/BooKSearchDB',
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   },
+// );
 
 const app = express();
 const PORT = process.env.PORT || 3000;
