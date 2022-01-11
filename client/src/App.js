@@ -11,7 +11,7 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
-const Link = createLink({
+const httpLink = createHttpLink({
   uri: 'graphql'
 
 });
