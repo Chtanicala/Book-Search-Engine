@@ -8,12 +8,11 @@
 - [Questions](#Questions)
     
 ## Description
-- TThis application allows for the user to create an account and keep track of their book list.
+- This application allows for the user to create an account and keep track of their book list.
     
 
 ## Usage
 - Sign up through the sign up form then search the book by title!
-- 
 
 ## Contributing
 - Christian Tanicala
