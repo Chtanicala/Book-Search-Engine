@@ -12,7 +12,7 @@ const typeDefs = gql`
     type Book {
         _id: ID
         authors: [String]!
-        description: String!
+        description: String
         bookId: ID!
         title: String!
         image: String
@@ -29,12 +29,12 @@ const typeDefs = gql`
     }
 
     input AddBook {
-        authors: [String]!
+        authors: [String]
         description: String!
-        bookId: ID!
+        bookId: String
         title: String!
         image: String
-        link: String
+        link: String!
     }
     
     type Mutation {

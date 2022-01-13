@@ -1,28 +1,20 @@
-import {gql} from '@apollo/client'
+import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
-    mutation loginUser($email: String!, $password: String!) {
-      loginUser(email: $email, password: $password) {
-            token
-            user {
-              _id
-              username
-            }
-          }
+  mutation loginUser($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
     }
-`
+  }
+`;
 
 export const ADD_USER = gql`
-mutation addUser(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    addUser(
-      username: String!
-      email: $email
-      password: $password
-    ) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
@@ -33,41 +25,37 @@ mutation addUser(
 `;
 
 export const SAVE_BOOK = gql`
-  mutation saveBook($book: AddBook!) {
-      saveBook(book: $book) {
-        _id
-        username
-        email
-        bookCount
-        savedBooks {
-            _id
-            authors
-            description
-            bookId
-            title
-            image
-            link
-        }
+  mutation saveBook($bookData: BookInput!) {
+    saveBook(bookData: $bookData) {
+      _id
+      username
+      email
+      savedBooks {
+        bookId
+        authors
+        image
+        description
+        title
+        link
       }
+    }
   }
-`
+`;
 
 export const REMOVE_BOOK = gql`
   mutation removeBook($bookId: ID!) {
-      removeBook($bookId: ID!) {
-        _id
-        username
-        email
-        bookCount
-        savedBooks {
-            _id
-            authors
-            description
-            bookId
-            title
-            image
-            link
-        }
+    removeBook(bookId: $bookId) {
+      _id
+      username
+      email
+      savedBooks {
+        bookId
+        authors
+        image
+        description
+        title
+        link
       }
+    }
   }
-`
+`;

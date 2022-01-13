@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models')
+const { User } = require('../models')
 const { signToken } = require('../utils/auth')
 
 const resolvers = {
@@ -12,8 +12,8 @@ const resolvers = {
 
     Mutation: {
 
-        addUser: async (parent, {username, email, password }) => {
-            const user = await User.create({ username, email, password })
+        addUser: async (parent, args) => {
+            const user = await User.create(args)
             const token = signToken(user);
             return { token, user }
         },
@@ -36,22 +36,31 @@ const resolvers = {
             return { token, user}
         },
 
-        saveBook: async (parent, {book}, context) => {
-            const username = context.user.username;
-            return User.findOneAndUpdate(
-                {username},
-                {$addToSet: { savedbooks: book}},
-                {new: true}
-            )
+        saveBook: async (parent, { bookData }, context) => {
+          if (context.user) {
+            const updatedUser = await User.findByIdAndUpdate(
+              { _id: context.user._id },
+              { $push: { savedBooks: bookData } },
+              { new: true }
+            );
+    
+            return updatedUser;
+          }
+    
+          throw new AuthenticationError('You need to be logged in!');
         },
-        
-        saveBook: async (parent, {book}, context) => {
-            const username = context.user.username;
-            return User.findOneAndUpdate(
-                {username},
-                {$pull: { savedbooks: bookId}},
-                {new: true}
-            )
+        removeBook: async (parent, { bookId }, context) => {
+          if (context.user) {
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { $pull: { savedBooks: { bookId } } },
+              { new: true }
+            );
+    
+            return updatedUser;
+          }
+    
+          throw new AuthenticationError('You need to be logged in!');
         },
     }
 }
